@@ -1,5 +1,6 @@
 package repository;
 
+import helpers.CsvMapper;
 import helpers.FileManager;
 import helpers.JsonMapper;
 import model.Expense;
@@ -47,9 +48,12 @@ public class ExpenseRepository {
         saveExpenses(expenses);
     }
 
-    public void exportToCSV(String csv){
+    public void exportToCSV(){
         FileManager manager = new FileManager("expenses.csv");
         manager.createFile();
+        String[] headers = {"id", "description", "category", "amount", "createdAt", "updatedAt"};
+        ArrayList<Expense> expenses = getAllExpenses();
+        String csv = CsvMapper.expenseToCsv(headers, expenses);
         manager.writeFile(csv);
     }
 

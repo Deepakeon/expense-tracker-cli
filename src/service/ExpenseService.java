@@ -87,9 +87,6 @@ public class ExpenseService {
     }
 
     public void exportToCSV(){
-        ArrayList<Expense> expenses = getAllExpenses();
-        String[] headers = {"id", "description", "category", "amount", "createdAt", "updatedAt"};
-        String csv = CsvMapper.expenseToCsv(headers, expenses);
-        expenseRepository.exportToCSV(csv);
+        expenseRepository.exportToCSV();
     }
 }
